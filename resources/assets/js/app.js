@@ -17,6 +17,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('navbar-animation', require('./components/NavbarAnimation.vue'));
+Vue.component('course', require('./components/courses/Course.vue'));
 
 const app = new Vue({
     el: '#app'

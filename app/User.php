@@ -30,8 +30,8 @@ class User extends Authenticatable
     /**
      * Get all of the courses for the user.
      */
-    public function posts()
+    public function courses()
     {
-        return $this->hasMany('App\User');
+        return $this->hasMany('App\Course');
     }
 }
