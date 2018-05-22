@@ -11,10 +11,19 @@
 |
 */
 Auth::routes();
-Route::get('/', 'HomeController@home');
 
-Auth::routes();
+Route::get('/', 'HomeController@index');
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('courses', 'CoursesController');
-Route::resource('courses.modules', 'ModulesController');
+Route::get('/home', 'HomeController@home')->name('home');
+
+Route::resource('courses', 'CoursesController')->only([
+    'index', 'show'
+]);
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], function () {
+    Route::resource('courses', 'CoursesController')->only([
+        'create', 'edit', 'store', 'update', 'destroy'
+    ]);
+    Route::resource('courses.modules', 'ModulesController');
+    Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
+});

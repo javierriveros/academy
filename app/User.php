@@ -27,6 +27,29 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function isStudent() {
+		return $this->type >= 1;
+    }
+
+	public function isTeacher() {
+		return $this->type >= 2;
+    }
+
+	public function isAdmin() {
+		return $this->type >= 3;
+    }
+
+    public function rol()
+    {
+        if ($this->isAdmin()) {
+            return 'admin';
+        } else if($this->isTeacher()) {
+            return 'teacher';
+        } else {
+            return 'student';
+        }
+    }
+
     /**
      * Get all of the courses for the user.
      */

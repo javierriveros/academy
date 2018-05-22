@@ -14,8 +14,7 @@ class StoreCourse extends FormRequest
      */
     public function authorize()
     {
-        // return auth()->check() && auth()->user()->rol->id === 1;
-        return auth()->check();
+        return auth()->check() && auth()->user()->type === 'admin';
     }
 
     /**

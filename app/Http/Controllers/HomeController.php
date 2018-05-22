@@ -24,8 +24,10 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        if (\Auth::check())
+            return redirect()->route('home');
         $courses = Course::latest()->get();
-        return view('home', ['courses' => $courses]);
+        return view('unauthenticated', ['courses' => $courses]);
     }
 
     /**

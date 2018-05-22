@@ -27,9 +27,14 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <h6 class="dropdown-header">Administrador</h6>
+                            @if (Auth::user()->isAdmin())
+                                <a href="{{ route('admin.dashboard') }}" class="dropdown-item">Dashboard</a> 
+                            @endif
+
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
+                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                 Logout
                             </a>
 
