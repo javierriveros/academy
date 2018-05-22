@@ -1,11 +1,29 @@
-<div class="card">
-    <a href="{{ url('courses/' . $course->id) }}"><img src="http://place-hold.it/500x250" alt="" class="card-img-top"></a>
-    <div class="card-body">
-        <h5 class="card-title"><a href="{{ url('courses/' . $course->id) }}">{{ $course->name }}</a></h5>
-        <p class="card-text">
-            <p class="mb-1">{{ str_limit($course->description, $limit = 70, $end = '...') }}</p>
-            <small class="text-muted d-block">Creado {{ $course->created_at->diffForHumans()  }}</small>
-        </p>
-        <a href="{{ url('courses/' . $course->id) }}" class="btn btn-info btn-sm">Ver más</a>
+<article class="card">
+    <div class="card-img-top">
+        <a href="{{ url('courses/' . $course->id) }}">
+            @if($course->picture)
+                <img src="{{ asset($course->picture) }}" alt="{{ $course->name }}" class="img-responsive">
+            @endif
+        </a>
     </div>
-</div>
+    <div class="card-body">
+        <div class="card-title"><a href="{{ route('courses.show', $course) }}" hreflang="es">{{ $course->name }}</a></div>
+
+        <footer class="card-footer" style="border-top: 1px solid #dfe0e0;padding-left:0;padding-right:0;padding-bottom:0;background-color:transparent">
+            {{--
+            <article typeof="Person" about="/profesores/alvaro-felipe" class="curso__teacher">
+                <div class="card__user-img curso__teacher-img">
+                    <div>
+                        <a href="/profesores/alvaro-felipe">
+                                        <img src="https://ed.team/sites/default/files/styles/thumbnail/public/pictures/2017-11/alvaro_0.jpg?itok=4M1cv5mv" alt="Álvaro Felipe - Profesor y Web Designer en EDteam" typeof="Image" width="100" height="100">
+                                    </a>
+                    </div>
+                </div>
+                <div class="card__user-name curso__teacher-name">
+                    <div>Álvaro Felipe</div>
+                </div>
+            </article> --}}
+            <a href="{{ url('courses/' . $course->id) }}" class="btn btn-info btn-sm">Ver más</a>
+        </footer>
+    </div>
+</article>

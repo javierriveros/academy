@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCourse;
+use App\Http\Requests\UpdateCourse;
 use App\Course;
+use Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class CoursesController extends Controller
 {
@@ -31,30 +37,24 @@ class CoursesController extends Controller
     public function create()
     {
         $course = new Course;
+        $course->sentence = "El conejo brinca";
         return view('courses.create', ['course' => $course]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param StoreCourse|Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCourse $request)
     {
-        $request->validate([
-            'name' => 'required|unique:courses|max:255',
-            'description' => 'required'
-        ]);
-        $course = new Course;
-
-        $course->name = $request->name;
-        $course->description = $request->description;
-
-        $course->user_id = Auth::user()->id;
+        $course = new Course($request->all());
+        $course->user()->associate(auth()->user());
+        $this->storeImage($request, $course);
 
         if($course->save()) {
-            return redirect()->route('courses.index');
+            return redirect()->route('courses.show', $course);
         } else {
             return view('courses.create', ['course' => $course]);
         }
@@ -79,20 +79,23 @@ class CoursesController extends Controller
      */
     public function edit(Course $course)
     {
+        $course->sentence = 'El conejo brinca';
         return view('courses.edit', ['course' => $course]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param UpdateCourse|Request $request
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function update(UpdateCourse $request, Course $course)
     {        
-        $course->name = $request->name;
-        $course->description = $request->description;
+        $course->name = $request->get('name');
+        $course->description = $request->get('description');
+        
+        $this->storeImage($request, $course);
 
         if($course->save()) {
             return redirect()->route('courses.index');
@@ -111,5 +114,21 @@ class CoursesController extends Controller
     {
         $course->delete();
         return redirect()->route('courses.index');
+    }
+
+    /**
+     * Guarda la imagen en disco y asigna su ruta al curso.
+     *
+     * @param Request $request
+     * @param $course
+     */
+    private function storeImage(Request &$request, &$course)
+    {
+        $picture = $request->file('picture');
+        if ($picture) {
+            $new_name = md5($course->name . time()) . '.' . $picture->getClientOriginalExtension();
+            $picture->move('uploads/courses/', $new_name);
+            $course->picture = 'uploads/courses/' . $new_name;
+        }
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Course;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['index', 'home']]);
     }
 
     /**
@@ -23,6 +24,18 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        return view('home');
+        $courses = Course::latest()->get();
+        return view('home', ['courses' => $courses]);
+    }
+
+    /**
+     * Show the application home.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function home(Request $request)
+    {
+        $courses = Course::latest()->limit(4)->get();
+        return view('home', ['courses' => $courses]);
     }
 }

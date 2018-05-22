@@ -34,4 +34,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Course');
     }
+
+    /**
+     * Get all of the modules for the user.
+     */
+    public function modules()
+    {
+        return $this->hasMany('App\Module');
+    }
 }

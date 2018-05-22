@@ -16,8 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('navbar-animation', require('./components/NavbarAnimation.vue'));
-Vue.component('course', require('./components/courses/Course.vue'));
+Vue.component('verify-human', require('./components/VerifyHuman.vue'));
 
 const app = new Vue({
     el: '#app'

@@ -12,10 +12,15 @@
         methods: {
             toggleNavClass() {
                 if($('.main-banner').length > 0)
-                    if ($(window).scrollTop() > $('.main-banner').innerHeight()) 
+                    if ($(window).scrollTop() > 100) {
                         $(".navbar").removeClass("bg-transparent");
-                    else
+                        $(".navbar").removeClass("navbar-dark");
+                        $(".navbar").addClass("navbar-light");
+                    } else {
                         $(".navbar").addClass("bg-transparent");
+                        $(".navbar").removeClass("navbar-light");
+                        $(".navbar").addClass("navbar-dark");
+                    }
             }
         }
     }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
+    protected $fillable = ['name', 'description'];
     /**
      * Scope a query to order courses asc
      *
@@ -23,5 +24,13 @@ class Course extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Get the course modules.
+     */
+    public function modules()
+    {
+        return $this->hasMany('App\Module');
     }
 }

@@ -4,11 +4,17 @@
 
 // Variables
 @import "variables";
+@import "page-header";
 @import "sign-in";
 @import "footer";
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+img,
+video {
+  max-width: 100%;
+}
 
 #app {
   padding-top: 3rem;
@@ -22,6 +28,10 @@
 .navbar .navbar-nav .nav-link {
   font-size: 12px;
   @extend .text-uppercase;
+}
+
+.navbar.bg-transparent .navbar-nav .nav-link {
+  color: lighten(#fff, 25%);
 }
 
 .main-banner {

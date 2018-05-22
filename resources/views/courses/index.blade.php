@@ -1,11 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="big-padding blue-grey text-center white-text bottom-space">
-        <h1 class="card-title">Cursos</h1>
-        <hr>
-    </div>
-
+    <section class="page-header page-header__front">
+        <img src="{{ asset('img/banner-home-v2.jpg') }}" alt="" class="page-header__img">
+        <div class="container page-header__data">
+            <div class="row justify-content-center align-items-center">
+                <h2 class="page-header__title">Cursos disponibles</h2>
+                <p class="lead">Disfruta de nuestra variedad de cursos</p>
+            </div>
+        </div>
+    </section>
     <div class="container">
         <div class="row">
             @forelse ($courses as $course)
