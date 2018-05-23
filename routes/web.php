@@ -25,7 +25,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('profile/{user}', 'UsersController@update')->name('users.update');
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], function () {
     // Route::resource('courses', 'CoursesController')->only([
     //     'create', 'edit', 'store', 'update', 'destroy'
     // ]);
