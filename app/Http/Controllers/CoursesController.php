@@ -108,6 +108,7 @@ class CoursesController extends Controller
         $course->name = $request->get('name');
         $course->description = $request->get('description');
         
+        if ($request->has('picture'))
         $this->storeImage($request, $course);
 
         if($course->save()) {
