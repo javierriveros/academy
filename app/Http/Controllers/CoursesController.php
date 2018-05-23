@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCourse;
 use App\Http\Requests\UpdateCourse;
 use App\Course;
+use App\User;
 use Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
@@ -14,9 +15,6 @@ use Illuminate\Support\Facades\Storage;
 
 class CoursesController extends Controller
 {
-    public function __construct() {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
-    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +24,15 @@ class CoursesController extends Controller
     {
         // $courses = Course::latest()->paginate(1);
         $courses = Course::latest()->get();
-        return view('courses.index', ['courses' => $courses]);
+        return view('courses.index', compact('courses'));
+    }
+
+    /**
+     * Show the all courses
+     */
+    public function indexAdmin(Request $request) {
+        $courses = Course::latest()->paginate(10);
+        return view('admin.courses.index', compact('courses'));
     }
 
     /**
@@ -38,7 +44,9 @@ class CoursesController extends Controller
     {
         $course = new Course;
         $course->sentence = "El conejo brinca";
-        return view('courses.create', ['course' => $course]);
+        $teachers = User::teachers()->pluck('name', 'id');
+        //dd($teachers);
+        return view('admin.courses.create', compact('course', 'teachers'));
     }
 
     /**
@@ -49,14 +57,16 @@ class CoursesController extends Controller
      */
     public function store(StoreCourse $request)
     {
+        //dd($request);
         $course = new Course($request->all());
+        $course->teacher_id = $request->get('teacher_id');
         $course->user()->associate(auth()->user());
         $this->storeImage($request, $course);
 
         if($course->save()) {
             return redirect()->route('courses.show', $course);
         } else {
-            return view('courses.create', ['course' => $course]);
+            return view('admin.courses.create', compact('course'));
         }
     }
 
@@ -68,7 +78,7 @@ class CoursesController extends Controller
      */
     public function show(Course $course)
     {
-        return view('courses.show', ['course' => $course]);
+        return view('courses.show', compact('course'));
     }
 
     /**
@@ -77,10 +87,12 @@ class CoursesController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course)
+    public function edit($id)
     {
+        $course = Course::findOrFail($id);
+        $teachers = User::teachers()->pluck('name', 'id');
         $course->sentence = 'El conejo brinca';
-        return view('courses.edit', ['course' => $course]);
+        return view('admin.courses.edit', compact('course', 'teachers'));
     }
 
     /**
@@ -90,17 +102,18 @@ class CoursesController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCourse $request, Course $course)
-    {        
+    public function update(UpdateCourse $request, $id)
+    {
+        $course = Course::findOrFail($id);
         $course->name = $request->get('name');
         $course->description = $request->get('description');
         
         $this->storeImage($request, $course);
 
         if($course->save()) {
-            return redirect()->route('courses.index');
+            return redirect()->route('admin.courses.index');
         } else {
-            return view('courses.edit', ['course' => $course]);
+            return view('admin.courses.edit', compact('course'));
         }
     }
 
@@ -110,10 +123,11 @@ class CoursesController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course)
+    public function destroy($id)
     {
+        $course = Course::findOrFail($id);
         $course->delete();
-        return redirect()->route('courses.index');
+        return redirect()->route('admin.courses.index');
     }
 
     /**

@@ -6,7 +6,7 @@
 
         <div class="card">
             <div class="card-body">
-                @include('courses.form', ['course' => $course, 'url' => '/courses/' . $course->id, 'method' => 'PATCH'])
+                @include('admin.courses.form', ['course' => $course, 'route' => ['admin.courses.update', $course->id], 'method' => 'PATCH'])
             </div>
         </div>
     </div>

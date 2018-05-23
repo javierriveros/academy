@@ -164,6 +164,7 @@ return [
          * Vendor service providers 
          */
         Collective\Html\HtmlServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
     ],
 
     /*

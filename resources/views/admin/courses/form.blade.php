@@ -1,4 +1,4 @@
-{!! Form::open(['url' => $url, 'method' => $method, 'files' => true]) !!}
+{!! Form::open(['route' => $route, 'method' => $method, 'files' => true]) !!}
     @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Errores:</strong>
@@ -20,8 +20,13 @@
     </div>
 
     <div class="form-group">
-        {{ Form::label('picture') }} 
-        {{ Form::file('picture') }}
+        {{ Form::label('teacher_id', 'Docente titular') }}
+        {!! Form::select('teacher_id',$teachers, null, ['class' => 'form-control', 'placeholder' => 'Selecciona el docente titular']) !!}
+    </div>
+
+    <div class="custom-file mb-2">
+        {{ Form::file('picture', ['class' => 'custom-file-input']) }}
+        {{ Form::label('picture', 'Seleccionar imágen', ['class' => 'custom-file-label']) }}
     </div>
 
     <div class="form-group">

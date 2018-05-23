@@ -14,7 +14,7 @@ class StoreCourse extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check() && auth()->user()->type === 'admin';
+        return auth()->check() && auth()->user()->isAdmin();
     }
 
     /**
@@ -36,6 +36,7 @@ class StoreCourse extends FormRequest
                 'required',
                 Rule::in(['El conejo brinca']),
             ],
+            'teacher_id' => 'required|integer',
         ];
     }
 
@@ -48,6 +49,7 @@ class StoreCourse extends FormRequest
             'picture.image' => 'El archivo adjuntado no se reconoce como imágen',
             'description.required' => 'La descripción del curso es obligatoria',
             'description.min' => 'El curso necesita más información',
+            'teacher_id.required' => 'El docente titular es requerido'
         ];
     }
 }

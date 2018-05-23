@@ -27,10 +27,14 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <h6 class="dropdown-header">Administrador</h6>
                             @if (Auth::user()->isAdmin())
-                                <a href="{{ route('admin.dashboard') }}" class="dropdown-item">Dashboard</a> 
+                                <h6 class="dropdown-header">Administrador</h6>
+                                <a href="{{ route('admin.dashboard') }}" class="dropdown-item">Panel de administración</a> 
+                                <div class="dropdown-divider"></div>
                             @endif
+
+                            <h6 class="dropdown-header">Configuración</h6>
+                            <a href="{{ route('users.profile') }}" class="dropdown-item">Editar perfil</a>
 
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}"

@@ -27,6 +27,15 @@ class Course extends Model
     }
 
     /**
+     * Get the titular teacher
+     */
+    public function teacher()
+    {
+        return $this->belongsTo('App\User', 'teacher_id');
+    }
+
+
+    /**
      * Get the course modules.
      */
     public function modules()

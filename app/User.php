@@ -65,4 +65,19 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Module');
     }
+
+    /**
+     * Scope a query to get teachers
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeTeachers($query)
+    {
+        return $query->where('type', 2);
+    }
+
+    public function teacherCourses() {
+        return $this->hasMany('App\Course', 'teacher_id');
+    }
 }
