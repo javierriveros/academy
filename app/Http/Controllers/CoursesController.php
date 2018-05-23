@@ -104,6 +104,7 @@ class CoursesController extends Controller
      */
     public function update(UpdateCourse $request, $id)
     {
+        dd($request);
         $course = Course::findOrFail($id);
         $course->name = $request->get('name');
         $course->description = $request->get('description');
