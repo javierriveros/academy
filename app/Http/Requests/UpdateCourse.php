@@ -38,6 +38,7 @@ class UpdateCourse extends FormRequest
                 'required',
                 Rule::in(['El conejo brinca']),
             ],
+            'teacher_id' => 'required|integer',
         ];
     }
 }
