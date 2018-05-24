@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <form method="POST" action="{{ route('login') }}"  class="form-signin">
+    <form method="POST" action="#"  class="form-signin">
         @csrf
         <div class="container">
             <div class="row justify-content-center align-items-center">
@@ -31,7 +31,15 @@
                         @endif
                     </div>
 
-                    <div class="checkbox mb-3">
+                    <div>
+                        <label for="validation">Escribe la frase: <strong class="frase"></strong></label>
+                        
+                        <input id="validation" type="text" class="form-control" placeholder="Frase"
+                            name="validation" required>
+                        <input type="hidden" name="frase">
+                    </div>
+
+                    <div class="checkbox mb-3 mt-2">
                         <label>
                             <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Recordar datos
                         </label>
@@ -51,4 +59,38 @@
         </div>
         
     </form>
+@endsection
+
+@section('scripts')
+<script>
+    (_ => {
+        const form = document.querySelector('form')
+        const generateFrase = () => {
+            let frases = [
+                'El conejo brinca',
+                'La iguana tomaba café',
+                'Petro presidente',
+                'El pez nada'
+            ]
+            let frase = document.querySelector('.frase')
+            let number = parseInt(Math.random() * 4)
+            form.frase.value = frases[number]
+            frase.innerText = frases[number]
+        }
+        generateFrase()
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+
+            if (form.validation.value !== form.frase.value) {
+                form.validation.classList.add('is-invalid')
+                let d = document.createElement('span')
+                d.classList.add('invalid-feedback')
+                d.innerHTML = `<strong>La frase no coincide</strong>`
+                form.validation.parentElement.append(d)
+            } else {
+                form.submit()
+            }
+        })
+    })()
+</script>
 @endsection

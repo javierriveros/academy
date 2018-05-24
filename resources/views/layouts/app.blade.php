@@ -17,7 +17,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('/vendors/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('vendors/ckeditor/ckeditor.js') }}"></script>
     @yield('scripts')
 </body>
 
