@@ -28,7 +28,7 @@
                     <small class="d-block ">—Aula virtual—</small>
                 </h1>
                 <h2 class="lead">Aprende desde tu casa con cursos online prácticos. </h2>
-                <a href="{{ url('login') }}" class="mt-2 btn btn-success btn-round btn-round-lg">Comienza ya!</a>
+                <a href="{{ url('register') }}" class="mt-2 btn btn-success btn-round btn-round-lg">Comienza ya!</a>
             </div>
             <div class="col-md-2 col-sm-1 d-none d-md-block"></div>
             <div class="col-md-4 d-none d-md-block">

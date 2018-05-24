@@ -61,6 +61,15 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="validation" class="col-md-4 col-form-label text-md-right">Escribe la frase: </label>
+                            <div class="col-md-6">
+                                <strong class="frase form-text"></strong>
+                                <input id="validation" type="text" class="form-control" placeholder="Frase" name="validation" required>
+                                <input type="hidden" name="frase">
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -74,4 +83,38 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script>
+    (_ => {
+        const form = document.querySelector('form')
+        const generateFrase = () => {
+            let frases = [
+                'El conejo brinca',
+                'La iguana tomaba café',
+                'Petro presidente',
+                'El pez nada'
+            ]
+            let frase = document.querySelector('.frase')
+            let number = parseInt(Math.random() * 4)
+            form.frase.value = frases[number]
+            frase.innerText = frases[number]
+        }
+        generateFrase()
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+
+            if (form.validation.value !== form.frase.value) {
+                form.validation.classList.add('is-invalid')
+                let d = document.createElement('span')
+                d.classList.add('invalid-feedback')
+                d.innerHTML = `<strong>La frase no coincide</strong>`
+                form.validation.parentElement.append(d)
+            } else {
+                form.submit()
+            }
+        })
+    })()
+
+</script>
 @endsection

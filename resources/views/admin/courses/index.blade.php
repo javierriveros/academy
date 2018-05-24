@@ -4,6 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-9">
+            <a href="{{ route('admin.courses.create') }}" class="btn btn-success">Nuevo curso</a>
             <table class="table">
                 <thead>
                     <tr>
