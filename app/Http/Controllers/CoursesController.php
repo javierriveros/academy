@@ -87,9 +87,8 @@ class CoursesController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Course $course)
     {
-        $course = Course::findOrFail($id);
         $teachers = User::teachers()->pluck('name', 'id');
         $course->sentence = 'El conejo brinca';
         return view('admin.courses.edit', compact('course', 'teachers'));
@@ -102,10 +101,8 @@ class CoursesController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCourse $request, $id)
+    public function update(UpdateCourse $request, Course $course)
     {
-        dd($request);
-        $course = Course::findOrFail($id);
         $course->name = $request->get('name');
         $course->description = $request->get('description');
         
@@ -125,9 +122,8 @@ class CoursesController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Course $course)
     {
-        $course = Course::findOrFail($id);
         $course->delete();
         return redirect()->route('admin.courses.index');
     }

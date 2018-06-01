@@ -2,26 +2,38 @@
 @section('content')
 @include('partials.page-header', ['title' => 'Administrar recursos'])
 <div class="container">
-    <div class="row">
-        <div class="col-md-6 mb-3">
-            <div class="card text-primary text-center">
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-white bg-warning">
                 <div class="card-body">
-                    <i class="fas fa-user" style="font-size: 5rem"></i>
-                    <h4 class="card-title mb-0 mt-2">
-                        <a href="{{ route('admin.users.index') }}" style="color: inherit">Usuarios</a>
-                    </h4>
+                    <div class="card-body-icon">
+                        <i class="fa fa-fw fa-book"></i>
+                    </div>
+                    <span>Cursos</span>
                 </div>
+                <a class="card-footer text-white small" href="{{ route('admin.courses.index') }}">
+                    <span class="float-left">Administrar</span>
+                    <span class="float-right">
+                        <i class="fa fa-angle-right"></i>
+                    </span>
+                </a>
             </div>
         </div>
 
-        <div class="col-md-6 mb-3">
-            <div class="card text-primary text-center">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary">
                 <div class="card-body">
-                    <i class="fas fa-book" style="font-size: 5rem"></i>
-                    <h4 class="card-title mb-0 mt-2">
-                        <a href="{{ route('admin.courses.index') }}" style="color: inherit">Cursos</a>
-                    </h4>
+                    <div class="card-body-icon">
+                        <i class="fa fa-fw fa-user"></i>
+                    </div>
+                    <span>Usuarios</span>
                 </div>
+                <a class="card-footer text-white small" href="{{ route('admin.users.index') }}">
+                    <span class="float-left">Administrar</span>
+                    <span class="float-right">
+                        <i class="fa fa-angle-right"></i>
+                    </span>
+                </a>
             </div>
         </div>
     </div>
