@@ -1,4 +1,4 @@
-{!! Form::model($module,['route' => ['courses.modules.create', $course->id], 'method' => $method]) !!}
+{!! Form::model([$course, $module],['route' => $route, 'method' => $method]) !!}
     @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Errores:</strong>

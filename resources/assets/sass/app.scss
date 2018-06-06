@@ -83,3 +83,21 @@ video {
     }
   }
 }
+
+.module,
+.topic {
+  &__title &__action {
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  &:hover &__action {
+    opacity: 1;
+  }
+}
+
+.no-style {
+  border: 0;
+  padding: 0;
+  outline: 0;
+  cursor: pointer;
+}

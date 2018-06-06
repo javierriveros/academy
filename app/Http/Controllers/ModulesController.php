@@ -2,22 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreModule;
 use App\Module;
 use App\Course;
 use Illuminate\Http\Request;
 
 class ModulesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -26,18 +17,17 @@ class ModulesController extends Controller
     public function create(Course $course)
     {
         $module = new Module;
-        return view('modules.create', ['module' => $module])->withCourse($course);
+        return view('admin.modules.create', ['module' => $module])->withCourse($course);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreModule|Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Course $course)
+    public function store(StoreModule $request, Course $course)
     {
-        dd($course);
         $module = new Module($request->all());
         $module->course()->associate($course);
         $module->user()->associate(auth()->user());
@@ -45,19 +35,8 @@ class ModulesController extends Controller
         if($module->save()) {
             return redirect()->route('courses.show', $course);
         } else {
-            return view('modules.create', ['module' => $module]);
+            return view('admin.modules.create', compact('module'));
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Module  $module
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Module $module)
-    {
-        //
     }
 
     /**
@@ -66,21 +45,28 @@ class ModulesController extends Controller
      * @param  \App\Module  $module
      * @return \Illuminate\Http\Response
      */
-    public function edit(Module $module)
+    public function edit(Course $course, Module $module)
     {
-        //
+        return view('admin.modules.edit', compact('module'))->withCourse($course);;
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreModule|Request  $request
      * @param  \App\Module  $module
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Module $module)
+    public function update(StoreModule $request, Course $course, Module $module)
     {
-        //
+        $module->title = $request->get('title');
+        $module->description = $request->get('description');
+
+        if($module->save()) {
+            return redirect()->route('courses.show', [$module->course]);
+        } else {
+            return view('admin.modules.edit', compact('module'));
+        }
     }
 
     /**
@@ -89,8 +75,9 @@ class ModulesController extends Controller
      * @param  \App\Module  $module
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Module $module)
+    public function destroy(Course $course, Module $module)
     {
-        //
+        $module->delete();
+        return redirect()->route('courses.show', [$module->course]);
     }
 }

@@ -14,7 +14,7 @@ class UpdateCourse extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check() && auth()->user()->isAdmin();
+        return auth()->check() && auth()->user()->isTeacher();
     }
 
     /**

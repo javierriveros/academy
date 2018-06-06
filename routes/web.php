@@ -43,5 +43,20 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], functio
     Route::match(['get', 'head'], '/courses/{course}/edit', 'CoursesController@edit')->name('admin.courses.edit');
     Route::match(['put', 'patch'], '/courses/{course}', 'CoursesController@update')->name('admin.courses.update');
     Route::delete('/courses/{course}', 'CoursesController@destroy')->name('admin.courses.delete');
+
+    # Modules
+    Route::match(['get', 'head'], '/courses/{course}/modules/create', 'ModulesController@create')->name('admin.modules.create');
+    Route::post('/courses/{course}/modules', 'ModulesController@store')->name('admin.modules.store');
+    Route::match(['get', 'head'], '/courses/{course}/modules/{module}/edit', 'ModulesController@edit')->name('admin.modules.edit');
+    Route::match(['put', 'patch'], '/courses/{course}/modules/{module}', 'ModulesController@update')->name('admin.modules.update');
+    Route::delete('/courses/{course}/modules/{module}', 'ModulesController@destroy')->name('admin.modules.delete');
+
+    # Topics
+    Route::match(['get', 'head'], '/courses/{course}/topics/create', 'TopicsController@create')->name('admin.topics.create');
+    Route::post('/courses/{course}/topics', 'TopicsController@store')->name('admin.topics.store');
+    Route::match(['get', 'head'], '/courses/{course}/topics/{topic}/edit', 'TopicsController@edit')->name('admin.topics.edit');
+    Route::match(['put', 'patch'], '/courses/{course}/topics/{topic}', 'TopicsController@update')->name('admin.topics.update');
+    Route::delete('/courses/{course}/topics/{topic}', 'TopicsController@destroy')->name('admin.topics.delete');
+
     
 });

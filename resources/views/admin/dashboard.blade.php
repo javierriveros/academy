@@ -2,7 +2,7 @@
 @section('content')
 @include('partials.page-header', ['title' => 'Administrar recursos'])
 <div class="container">
-    <div class="row mb-4">
+    <div class="row mb-4 justify-content-center align-items-center">
         <div class="col-md-4">
             <div class="card text-white bg-warning">
                 <div class="card-body">

@@ -4,7 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-9">
-            <a href="{{ route('admin.courses.create') }}" class="btn btn-success">Nuevo curso</a>
+            <div class="text-center">
+                <a href="{{ route('admin.courses.create') }}" class="btn btn-success ml-auto mr-auto mb-4">Nuevo curso</a>
+            </div>
             <table class="table">
                 <thead>
                     <tr>
@@ -19,7 +21,10 @@
                         <td>{{ $course->id }}</td>
                         <td><a href="{{ route('courses.show', $course) }}">{{ $course->name }}</a></td>
                         <td>
-                            <a href="{{ route('admin.courses.create', $course) }}" class="btn btn-sm btn-success">Añadir módulo</a>
+                            <a href="{{ route('admin.modules.create', $course) }}" class="btn btn-sm btn-success">Añadir módulo</a>
+                        </td>
+                        <td>
+                            <a href="{{ route('admin.topics.create', $course) }}" class="btn btn-sm btn-success">Añadir tema</a>
                         </td>
                         <td>
                             <a href="{{ route('admin.courses.edit', $course) }}" class="btn btn-sm btn-info">Editar</a>

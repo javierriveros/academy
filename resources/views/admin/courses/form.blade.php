@@ -14,14 +14,15 @@
         {{ Form::label('name', 'Nombre del curso') }}
         {{ Form::text('name', $course->name, ['class' => 'form-control', 'required' => 'required']) }}
     </div>
+
     <div class="form-group">
-        {{ Form::label('description', 'Descripción del curso') }}
-        {{ Form::textarea('description', $course->description, ['class' => 'form-control ckeditor', 'required' => 'required']) }}
+        {{ Form::label('teacher_id', 'Docente titular') }} {!! Form::select('teacher_id',$teachers, null, ['class' => 'form-control',
+        'placeholder' => 'Selecciona el docente titular']) !!}
     </div>
 
     <div class="form-group">
-        {{ Form::label('teacher_id', 'Docente titular') }}
-        {!! Form::select('teacher_id',$teachers, null, ['class' => 'form-control', 'placeholder' => 'Selecciona el docente titular']) !!}
+        {{ Form::label('description', 'Descripción del curso') }}
+        {{ Form::textarea('description', $course->description, ['class' => 'form-control ckeditor', 'required' => 'required']) }}
     </div>
 
     <div class="custom-file mb-2">

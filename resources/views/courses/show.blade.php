@@ -43,17 +43,53 @@
                 <div class="card">
                     <div class="card-body">
                         @forelse($course->modules()->get() as $module)
-                            <h4>{{ $module->title }}</h4>
-                            <p>{!! html_entity_decode($module->description) !!}</p>
-                            <ul class="list-group">
-                                @forelse($module->topics()->get() as $topic)
-                                    <li class="list-group-item"><a href="#">{{ $topic->title }}</a></li>
-                                @empty
-                                    <p>No topics available</p>
-                                @endforelse
-                            </ul>
+                            <div class="module">
+                                <h4 class="module__title">
+                                    {{ $module->title }}
+                                    @auth
+                                        @if(Auth::user()->isTeacher())
+                                            <a href="{{ route('admin.modules.edit', [$course,$module]) }}" class="module__action text-info"><i class="fas fa-pen-square"></i></a>
+                                        @endif
+                                        @if(Auth::user()->isAdmin())
+                                            <form action="{{ route('admin.modules.delete', [$course, $module]) }}" class="d-inline-block" method="POST">
+                                                @method('DELETE') 
+                                                @csrf
+                                                <button type="submit" class="no-style module__action text-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        @endif
+                                    @endauth
+                                </h4>
+                                <p class="module__description">{!! html_entity_decode($module->description) !!}</p>
+                                <ul class="list-group module__topics">
+                                    @forelse($module->topics()->get() as $topic)
+                                        <li class="list-group-item topic d-flex justify-content-between">
+                                            <a href="#" class="topic__title">{{ $topic->title }}</a>
+                                            <div class="pull-right">
+                                                @auth
+                                                    @if(Auth::user()->isTeacher())
+                                                        <a href="{{ route('admin.topics.edit', [$course, $topic]) }}" class="topic__action text-info"><i class="fas fa-pen-square"></i></a>
+                                                    @endif
+                                                    @if(Auth::user()->isAdmin())
+                                                        <form action="{{ route('admin.topics.delete', [$course, $topic]) }}" class="d-inline-block" method="POST">
+                                                            @method('DELETE') 
+                                                            @csrf
+                                                            <button type="submit" class="no-style topic__action text-danger">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    @endif
+                                                @endauth
+                                            </div>
+                                        </li>
+                                    @empty
+                                        <p>No topics available</p>
+                                    @endforelse
+                                </ul>
+                            </div>
                         @empty
-                            <p>No modules available</p>
+                            <p>No hay módulos disponibles</p>
                         @endforelse
                     </div>
                 </div>

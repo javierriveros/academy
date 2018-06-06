@@ -107,7 +107,7 @@ class CoursesController extends Controller
         $course->description = $request->get('description');
         
         if ($request->has('picture'))
-        $this->storeImage($request, $course);
+            $this->storeImage($request, $course);
 
         if($course->save()) {
             return redirect()->route('admin.courses.index');

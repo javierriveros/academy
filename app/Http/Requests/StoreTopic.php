@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreModule extends FormRequest
+class StoreTopic extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class StoreModule extends FormRequest
     {
          return [
             'title' => 'required|min:2',
-            'description' => 'required|min:6',
+            'content' => 'required|min:6',
         ];
     }
 
@@ -35,8 +35,8 @@ class StoreModule extends FormRequest
         return [
             'title.required' => 'El título es obligatorio',
             'title.min' => 'El título debe tener por lo menos 2 letras',
-            'description.required' => 'La descripción del módulo es obligatoria',
-            'description.min' => 'El módulo necesita más información',
+            'content.required' => 'El contenido del tema es obligatorio',
+            'content.min' => 'El tema necesita más contenido',
         ];
     }
 }

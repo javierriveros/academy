@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Topic extends Model
 {
+    protected $fillable = ['title', 'content'];
     /**
      * Get the user that owns the topic.
      */
