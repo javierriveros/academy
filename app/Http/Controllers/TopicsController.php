@@ -11,15 +11,14 @@ use Illuminate\Http\Request;
 class TopicsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Create a new controller instance.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('isTeacherOwner')->except('show');
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -45,7 +44,7 @@ class TopicsController extends Controller
         $topic->user()->associate(auth()->user());
 
         if($topic->save()) {
-            return redirect()->route('topics.show', $topic);
+            return redirect()->route('courses.topics.show', $topic);
         } else {
             return view('admin.topics.create', compact('topic'));
         }
@@ -57,9 +56,9 @@ class TopicsController extends Controller
      * @param  \App\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function show(Topic $topic)
+    public function show(Course $course, Topic $topic)
     {
-        //
+        return view('topics.show', compact('course', 'topic'));
     }
 
     /**

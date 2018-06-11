@@ -29,9 +29,9 @@ class UpdateUser extends FormRequest
     {
         return [
             'current_password' => 'required',
-            // 'picture' => 'image',
             'new_password' => 'confirmed',
-            'name' => 'required'
+            'name' => 'required',
+            'picture' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ];
     }
 
@@ -41,6 +41,7 @@ class UpdateUser extends FormRequest
             'name.required' => 'El nombre es obligatorio',
             'current_password.required' => 'La contraseña actual es requerida',
             'new_password.confirmed' => 'Las contraseñas no coinciden',
+            'picture.image' => 'El archivo adjuntado no se reconoce como imágen',
         ];
     }
 }

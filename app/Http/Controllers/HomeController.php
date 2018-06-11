@@ -37,6 +37,9 @@ class HomeController extends Controller
      */
     public function home(Request $request)
     {
+        if (\Auth::user()->isTeacher()) {
+            return redirect()->route('admin.dashboard');
+        }
         $courses = Course::latest()->limit(4)->get();
         return view('home', ['courses' => $courses]);
     }

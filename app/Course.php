@@ -42,4 +42,20 @@ class Course extends Model
     {
         return $this->hasMany('App\Module');
     }
+
+    /**
+     * Get the course questions.
+     */
+    public function questions()
+    {
+        return $this->hasMany('App\Question');
+    }
+
+    /**
+     * Get all of the student for the course.
+     */
+    public function students()
+    {
+        return $this->hasMany('App\HasCourse');
+    }
 }

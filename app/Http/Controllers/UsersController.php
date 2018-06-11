@@ -47,9 +47,16 @@ class UsersController extends Controller
             }
         }
 
+        if (auth()->user()->isAdmin() && $request->has('type')) {
+            $user->type = $request->get('type');
+        }
+
         if ($request->get('new_password')) {
             $user->password = bcrypt($request->get('new_password'));
         }
+
+        if ($request->has('picture'))
+            $this->storeImage($request, $user);
 
         $user->name = $request->get('name');
         $user->save();
@@ -61,5 +68,21 @@ class UsersController extends Controller
         
         flash('Perfil actualizado')->success();
         return back();
+    }
+
+    /**
+     * Guarda la imagen en disco y asigna su ruta al curso.
+     *
+     * @param Request $request
+     * @param $user
+     */
+    private function storeImage(Request &$request, &$user)
+    {
+        $picture = $request->file('picture');
+        if ($picture) {
+            $new_name = md5($user->name . time()) . '.' . $picture->getClientOriginalExtension();
+            $picture->move('uploads/users/', $new_name);
+            $user->picture = 'uploads/users/' . $new_name;
+        }
     }
 }

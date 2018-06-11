@@ -11,7 +11,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a href="{{ url('courses') }}" class="nav-link">Cursos</a></li>
+                <li class="nav-item">
+                    <a href="{{ url('courses') }}" class="nav-link">Cursos</a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -23,11 +25,14 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @if (Auth::user()->picture)
+                                <img src="{{ asset(Auth::user()->picture) }}" width="25" alt="Imágen de {{ Auth::user()->name }}" class="mr-1 img-responsive">
+                            @endif
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            @if (Auth::user()->isAdmin())
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            @if (Auth::user()->isTeacher())
                                 <h6 class="dropdown-header">Administrador</h6>
                                 <a href="{{ route('admin.dashboard') }}" class="dropdown-item">Panel de administración</a> 
                                 <div class="dropdown-divider"></div>

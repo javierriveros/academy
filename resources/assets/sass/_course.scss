@@ -1,0 +1,11 @@
+.course {
+    &__nav .nav-item .nav-link.active {
+        background-color: #fff;
+        border-bottom-color: #fff;
+    }
+    &__content {
+        border-top: none;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+}

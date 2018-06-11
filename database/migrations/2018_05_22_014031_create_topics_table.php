@@ -19,10 +19,10 @@ class CreateTopicsTable extends Migration
             $table->text('content');
 
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->integer('module_id')->unsigned();
-            $table->foreign('module_id')->references('id')->on('modules');
+            $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
 
             $table->timestamps();
         });

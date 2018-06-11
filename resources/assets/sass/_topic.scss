@@ -1,0 +1,46 @@
+.module,
+.topic {
+  &__title &__action {
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  &:hover &__action {
+    opacity: 1;
+  }
+}
+
+.topic {
+    &__content {
+        font-family: 'Playfair Display', medium-content-serif-font,Georgia,Cambria,times new roman,Times,serif;
+        line-height: 1.9;
+        padding: 1em 0;
+        color: #000;
+        font-size: 21px;
+        text-align: justify;
+        
+        h1, 
+        h2, 
+        h3, 
+        h4 {
+            margin: 1em 0;
+            font-weight: 400;
+            padding: 0;
+        }
+
+        h2 {
+            font-size: 2em !important;
+        }
+
+        h3 {
+            font-size: 1.4em !important;
+        }
+
+        a {
+            color: #586efc !important;
+        }
+
+        img:not(.full-width) {
+            max-width: 100%;
+        }
+    }
+}

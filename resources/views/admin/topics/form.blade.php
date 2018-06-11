@@ -17,7 +17,7 @@
 
     <div class="form-group">
         {{ Form::label('module_id', 'Módulo del tema') }} {!! Form::select('module_id',$modules, null, ['class' => 'form-control',
-        'placeholder' => 'Selecciona el tema']) !!}
+        'placeholder' => 'Selecciona el módulo']) !!}
     </div>
 
     <div class="form-group">

@@ -19,10 +19,10 @@ class CreateCoursesTable extends Migration
             $table->text('description');
             
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->integer('teacher_id')->unsigned()->default(0);
-            $table->foreign('teacher_id')->references('id')->on('users');
+            $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();
         });

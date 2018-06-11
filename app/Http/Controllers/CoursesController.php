@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCourse;
 use App\Http\Requests\UpdateCourse;
 use App\Course;
+use App\Question;
+use App\Answer;
 use App\User;
 use Validator;
 use Illuminate\Validation\Rule;
@@ -15,6 +17,16 @@ use Illuminate\Support\Facades\Storage;
 
 class CoursesController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('isTeacherOwner')->only(['store', 'edit', 'update', 'destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +43,10 @@ class CoursesController extends Controller
      * Show the all courses
      */
     public function indexAdmin(Request $request) {
-        $courses = Course::latest()->paginate(10);
+        if (Auth::user()->isAdmin())
+            $courses = Course::latest()->paginate(10);
+        else
+            $courses = Course::where('teacher_id', Auth::user()->id)->paginate(10);
         return view('admin.courses.index', compact('courses'));
     }
 
@@ -78,7 +93,9 @@ class CoursesController extends Controller
      */
     public function show(Course $course)
     {
-        return view('courses.show', compact('course'));
+        $newQuestion =  new Question;
+        $newAnswer = new Answer;
+        return view('courses.show', compact('course', 'newQuestion', 'newAnswer'));
     }
 
     /**

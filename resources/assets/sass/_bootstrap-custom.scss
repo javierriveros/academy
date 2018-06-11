@@ -1,0 +1,77 @@
+#app {
+  padding-top: 3rem;
+}
+
+img,
+video {
+  max-width: 100%;
+}
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.navbar .navbar-nav .nav-link {
+  font-size: 14px;
+  @extend .text-uppercase;
+}
+
+.navbar.bg-transparent .navbar-nav .nav-link {
+  color: lighten(#fff, 25%);
+}
+
+#app > .alert {
+  position: fixed;
+  z-index: 99;
+  width: 80%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+}
+
+.btn {
+  &-round {
+    border-radius: 5em;
+    // background-color: #1bbc9b;
+    padding-left: 1em;
+    padding-right: 1em;
+    @extend .text-uppercase;
+
+    &-lg {
+      padding: 1em 2.5em;
+    }
+  }
+
+  &-link {
+    border-radius: 5em !important;
+    background-color: rgba(0, 123, 255, .1);
+
+    &.text-danger {
+      background-color: rgba(220, 53, 69, .1);
+    }
+  }
+}
+
+.card {
+  overflow: hidden;
+  &-body {
+    &-icon {
+      position: absolute;
+      z-index: 0;
+      top: -5px;
+      right: 10px;
+      font-size: 3rem;
+      // transform: rotate(15deg);
+    }
+  }
+}
+
+.no-style {
+  border: 0;
+  padding: 0;
+  outline: 0;
+  cursor: pointer;
+  background-color: transparent;
+}
