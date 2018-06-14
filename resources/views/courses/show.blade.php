@@ -20,9 +20,9 @@
 @section('content')
     <section class="page-header page-header__front">
         @if($course->picture)
-            <img src="{{ asset($course->picture) }}" alt="{{ $course->name }}" class="page-header__img" class="page-header__img">
+            <img src="{{ asset($course->picture) }}" alt="Portada del curso: {{ $course->name }}" class="page-header__img" class="page-header__img">
         @else
-            <img src="{{ asset('img/banner-home-v2.jpg') }}" alt="" class="page-header__img">
+            <img src="{{ asset('img/banner-home-v2.jpg') }}" alt="Portada del curso: {{ $course->name }}" class="page-header__img">
         @endif
         <div class="container page-header__data">
             <div class="row justify-content-center align-items-center">
@@ -50,16 +50,31 @@
                                 <h4 class="card-title">Acerca de {{ $course->name }}</h4>
                                 <p class="card-text">{!!html_entity_decode($course->description)!!}</p>
 
-                                <div class="d-flex align-items-center">
-                                    @if ($course->teacher->picture)
-                                        <img src="{{ asset($course->teacher->picture) }}" alt="Imágen de {{ $course->teacher->name }}" class="rounded-circle" style="max-width: 70px">
-                                    @else
-                                        <img src="{{ asset('img/avatar-robot.png') }}" alt="Imágen de {{ $course->teacher->name }}" class="rounded-circle" style="max-width: 70px">
-                                    @endif
-                                    <div class="ml-2">
-                                        <span>{{ $course->teacher->name }}</span>
-                                        <small class="text-muted d-block">Docente titular</small>
+                                <div class="d-flex align-items-center justify-content-between pt-3" style="border-top: 1px solid rgba(0,0,0,.2);">
+                                    <div class="d-flex align-items-center">
+                                        @if ($course->teacher->picture)
+                                            <img src="{{ asset($course->teacher->picture) }}" alt="Imágen de perfil de {{ $course->teacher->name }}" class="rounded-circle" style="max-width: 70px">
+                                        @else
+                                            <img src="{{ asset('img/avatar-robot.png') }}" alt="Imágen de perfil de {{ $course->teacher->name }}" class="rounded-circle" style="max-width: 70px">
+                                        @endif
+                                        <div class="ml-2">
+                                            <span>{{ $course->teacher->name }}</span>
+                                            <small class="text-muted d-block">Docente titular</small>
+                                        </div>
                                     </div>
+                                    @if(Auth::user() && Auth::user()->type == 1)
+                                        @if(!$course->isEnrolled)
+                                            <form action="{{ route('courses.enroll', $course) }}" class="d-inline-block" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-success">Matricular</button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('courses.unenroll', $course) }}" class="d-inline-block" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                            </form>
+                                        @endif
+                                    @endauth
                                 </div>
                             </div>
                         </div>

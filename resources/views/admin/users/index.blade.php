@@ -3,8 +3,8 @@
     @include('partials.page-header', ['title' => 'Todos los usuarios'])
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-9">
-            <table class="table">
+        <div class="col-12 col-md-9">
+            <table class="table table-hover table-responsive-sm">
                 <thead>
                     <tr>
                         <tr>
@@ -24,7 +24,7 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->rol() }}</td>
                         <td>
-                            <a href="{{ route('admin.users.edit', $user) }}">Editar</a>
+                            <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-sm btn-info" title="Editar"><i class="fa fa-pencil-alt"></i> <span class="d-none d-lg-inline-block">Editar usuario</span></a>
                         </td>
                     </tr>
                     @endforeach

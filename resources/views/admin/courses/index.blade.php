@@ -33,7 +33,7 @@
                                 <a href="{{ route('course.partial_notes.index', $course) }}" class="btn btn-sm btn-info" title="Administrar notas">Notas parciales</a>
                             </td>
                             <td>
-                                <a href="{{ route('admin.courses.edit', $course) }}" class="btn btn-sm btn-info" title="Editar"><i class="fa fa-pencil-alt"></i></a>
+                                <a href="{{ route('admin.courses.edit', $course) }}" class="btn btn-sm btn-info" title="Editar"><i class="fa fa-pencil-alt"></i> <span class="d-none d-lg-inline-block">Editar curso</span></a>
                             </td>
                             <td>
                                 @include('admin.courses.delete', $course)

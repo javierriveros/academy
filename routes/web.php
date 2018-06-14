@@ -33,6 +33,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('course.question.answers', 'AnswersController')->except([
         'index', 'show', 'create'
     ]);
+    Route::post('courses/{course}/enroll', 'CoursesController@enroll')->name('courses.enroll');
+    Route::post('courses/{course}/unenroll', 'CoursesController@unenroll')->name('courses.unenroll');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
@@ -77,5 +79,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
         # Partial Notes
         Route::resource('course.partial_notes', 'PartialNotesController')->except('show');
+        Route::resource('course.notes', 'NotesController')->except('show');
     });
 });

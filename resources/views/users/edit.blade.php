@@ -8,9 +8,9 @@
                     <div class="text-center">
                         <h2 class="card-title">Mi Perfil</h2>
                         @if (Auth::user()->picture)
-                            <img src="{{ asset($user->picture) }}" alt="Imágen de {{ $user->name }}" class="rounded-circle" style="max-width: 150px">
+                            <img src="{{ asset($user->picture) }}" alt="Imágen de perfil de {{ $user->name }}" class="rounded-circle" style="max-width: 150px">
                         @else
-                            <img src="{{ asset('img/avatar-robot.png') }}" alt="Imágen de {{ $user->name }}" class="rounded-circle" style="max-width: 150px">
+                            <img src="{{ asset('img/avatar-robot.png') }}" alt="Imágen de perfil de {{ $user->name }}" class="rounded-circle" style="max-width: 150px">
                         @endif
                     </div>
                     
@@ -71,7 +71,10 @@
                             ['class' => 'form-control']) }}
                         </div>
                         <div class="form-group">
-                            <input type="submit" class="btn btn-info" value="Guardar Cambios">
+                            <button type="submit" class="btn btn-info">
+                                <i class="fa fa-save"></i>
+                                Guardar Cambios
+                            </button>
                         </div>
                     {!! Form::close() !!}
                 </div>

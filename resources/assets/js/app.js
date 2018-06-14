@@ -21,3 +21,27 @@ Vue.component('verify-human', require('./components/VerifyHuman.vue'));
 const app = new Vue({
     el: '#app'
 });
+
+const toggleNavClass = e => { 
+    const $navbar = $(".navbar")
+    if($('.main-banner.main-banner__front').length > 0) { 
+        if ($(window).scrollTop() > 100) { 
+            $navbar.removeClass("bg-transparent")
+            $navbar.removeClass("navbar-dark")
+            $navbar.addClass("navbar-light")
+        } else { 
+            $navbar.addClass("bg-transparent")
+            $navbar.removeClass("navbar-light")
+            $navbar.addClass("navbar-dark")
+        } 
+    } 
+}
+(_ => {
+    $(document).ready(toggleNavClass)
+    $(window).on("scroll ready", toggleNavClass)
+
+    window.addEventListener('DOMContentLoaded', e => {
+        Prism.highlightAll()
+        $('#app > .alert').not('.alert-important').delay(3000).fadeOut(350);
+    })
+})()

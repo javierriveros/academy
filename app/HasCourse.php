@@ -17,8 +17,8 @@ class HasCourse extends Model
     /**
      * Get the user
      */
-    public function user()
+    public function student()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'student_id');
     }
 }

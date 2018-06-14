@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Course;
+use App\HasCourse;
 
 class HomeController extends Controller
 {
@@ -26,7 +27,7 @@ class HomeController extends Controller
     {
         if (\Auth::check())
             return redirect()->route('home');
-        $courses = Course::latest()->get();
+        $courses = Course::latest()->paginate(4);
         return view('unauthenticated', ['courses' => $courses]);
     }
 
@@ -40,7 +41,12 @@ class HomeController extends Controller
         if (\Auth::user()->isTeacher()) {
             return redirect()->route('admin.dashboard');
         }
-        $courses = Course::latest()->limit(4)->get();
+        $courses = Course::whereIn('id', function($query) {
+            $query->select('course_id')
+            ->from(with(new HasCourse)->getTable())
+            ->where('student_id', 1);
+        })->get();
+        
         return view('home', ['courses' => $courses]);
     }
 }

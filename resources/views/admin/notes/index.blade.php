@@ -1,6 +1,6 @@
 @extends('layouts.app') 
 @section('content')
-@include('partials.page-header', ['title' => 'Notas Parciales'])
+@include('partials.page-header', ['title' => 'Notas del curso'])
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-12 col-md-9">
@@ -10,21 +10,22 @@
                 </div>
             @endif
             <table class="table table-hover table-responsive-sm">
-                <caption>Lista de notas parciales de {{ $course->name }}</caption>
+                <caption>Lista de notas de {{ $course->name }}</caption>
                 <thead class="thead-light">
                     <tr>
                         <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Porcentaje</th>
+                        @foreach($partialNotes as $pn)
+                            <th>{{ $pn->name }}</th>
+                        @endforeach
                         <th colspan="2">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($partialNotes as $pn)
+                    @foreach($notes as $note)
                         <tr>
-                            <th scope="row">{{ $pn->id }}</th>
-                            <td>{{ $pn->name }}</td>
-                            <td>{{ $pn->percentage }}%</td>
+                            <th scope="row">{{ $note->id }}</th>
+                            <td>{{ $note->note }}</td>
+                            <td>{{ $note->partial_note_id }}</td>
                             <td>
                                 <a href="{{ route('course.partial_notes.edit', [$course, $pn]) }}" class="btn btn-sm btn-info" title="Editar">
                                     <i class="fa fa-pencil-alt"></i>

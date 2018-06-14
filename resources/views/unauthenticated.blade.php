@@ -42,42 +42,19 @@
     <div class="container">
         <div class="row justify-content-between">
             <div class="col">
-                <h1 class="h3 d-block">Últimos cursos agregados <a href="{{ url('courses') }}" class="btn btn-small btn-info btn-round btn-sm" style="float: right">Ver todos</a></h1>
+                <h2 class="h3 d-block">Últimos cursos agregados <a href="{{ url('courses') }}" class="btn btn-small btn-info btn-round btn-sm" title="Ver todos los cursos" style="float: right">Ver todos</a></h2>
             </div>
         </div>
 
         <div class="row">
             @forelse ($courses as $course)
-            <div class="col-sm-6 col-md-6 col-xl-3 mt-2 mb-2">
-    @include('courses.course', ['course' => $course])
-            </div>
+                <div class="col-sm-6 col-md-6 col-xl-3 mt-2 mb-2">
+                    @include('courses.course', ['course' => $course])
+                </div>
             @empty
-            <p>No hay cursos disponibles</p>
+                <p>No hay cursos disponibles</p>
             @endforelse
         </div>
     </div>
 </section>
-@endsection
- 
-@section('scripts')
-<script>
-    const toggleNavClass = e => { 
-            const $navbar = $(".navbar")
-            if($('.main-banner').length > 0) { 
-                if ($(window).scrollTop() > 100) { 
-                    $navbar.removeClass("bg-transparent")
-                    $navbar.removeClass("navbar-dark")
-                    $navbar.addClass("navbar-light")
-                } else { 
-                    $navbar.addClass("bg-transparent")
-                    $navbar.removeClass("navbar-light")
-                    $navbar.addClass("navbar-dark")
-                } 
-            } 
-        }
-        (_ => {
-            $(document).ready(toggleNavClass)
-            $(window).on("scroll ready", toggleNavClass)
-        })()
-</script>
 @endsection

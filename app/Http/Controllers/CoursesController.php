@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCourse;
 use App\Http\Requests\UpdateCourse;
 use App\Course;
+use App\HasCourse;
 use App\Question;
 use App\Answer;
 use App\User;
@@ -95,7 +96,47 @@ class CoursesController extends Controller
     {
         $newQuestion =  new Question;
         $newAnswer = new Answer;
+        $course->isEnrolled = HasCourse::where([
+            ['student_id', '=', Auth::user()->id],
+            ['course_id', '=', $course->id]
+        ])->count() == 1 ? true : false;
         return view('courses.show', compact('course', 'newQuestion', 'newAnswer'));
+    }
+
+    /**
+     * Enroll a student in the specified course
+     *
+     * @param  \App\Course  $course
+     * @return \Illuminate\Http\Response
+     */
+    public function enroll(Course $course)
+    {
+        $has_course = new HasCourse;
+        $has_course->course()->associate($course);
+        $has_course->student()->associate(Auth::user());
+        if ($has_course->save()) {
+            flash('Ha sido matriculado en el curso')->success();
+            return back();
+        } else {
+            return back();
+        }
+    }
+
+    /**
+     * Unenroll a student form a specified course
+     *
+     * @param  \App\Course  $course
+     * @return \Illuminate\Http\Response
+     */
+    public function unenroll(Course $course)
+    {
+        $has_course = HasCourse::where([
+            ['student_id', '=', Auth::user()->id],
+            ['course_id', '=', $course->id]
+        ]);
+        $has_course->delete();
+        flash('Has sido retirado del curso')->success();
+        return back();
     }
 
     /**

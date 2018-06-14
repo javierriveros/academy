@@ -13921,8 +13921,32 @@ Vue.component('example-component', __webpack_require__(40));
 Vue.component('verify-human', __webpack_require__(43));
 
 var app = new Vue({
-  el: '#app'
+    el: '#app'
 });
+
+var toggleNavClass = function toggleNavClass(e) {
+    var $navbar = $(".navbar");
+    if ($('.main-banner.main-banner__front').length > 0) {
+        if ($(window).scrollTop() > 100) {
+            $navbar.removeClass("bg-transparent");
+            $navbar.removeClass("navbar-dark");
+            $navbar.addClass("navbar-light");
+        } else {
+            $navbar.addClass("bg-transparent");
+            $navbar.removeClass("navbar-light");
+            $navbar.addClass("navbar-dark");
+        }
+    }
+};
+(function (_) {
+    $(document).ready(toggleNavClass);
+    $(window).on("scroll ready", toggleNavClass);
+
+    window.addEventListener('DOMContentLoaded', function (e) {
+        Prism.highlightAll();
+        $('#app > .alert').not('.alert-important').delay(3000).fadeOut(350);
+    });
+})();
 
 /***/ }),
 /* 14 */

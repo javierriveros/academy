@@ -3,13 +3,13 @@
     <div class="pull-right">
         @auth
             @if(Auth::user()->isTeacher() && Auth::user()->id == $topic->module->course->teacher_id || Auth::user()->isAdmin())
-                <a href="{{ route('admin.topics.edit', [$course, $topic]) }}" class="topic__action text-info"><i class="fas fa-pen-square"></i></a>
+                <a href="{{ route('admin.topics.edit', [$course, $topic]) }}" class="topic__action text-info" title="Editar tema"><i class="fas fa-pen-square"></i></a>
             @endif
             @if(Auth::user()->isAdmin())
                 <form action="{{ route('admin.topics.delete', [$course, $topic]) }}" class="d-inline-block" method="POST">
                     @method('DELETE')
                     @csrf
-                    <button type="submit" class="no-style topic__action text-danger">
+                    <button type="submit" class="no-style topic__action text-danger" title="Eliminar tema">
                         <i class="fas fa-trash"></i>
                     </button>
                 </form>

@@ -42,11 +42,11 @@ class User extends Authenticatable
     public function rol()
     {
         if ($this->isAdmin()) {
-            return 'admin';
+            return 'Administrador';
         } else if($this->isTeacher()) {
-            return 'teacher';
+            return 'Profesor';
         } else {
-            return 'student';
+            return 'Estudiante';
         }
     }
 

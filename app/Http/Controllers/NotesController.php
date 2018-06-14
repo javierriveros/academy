@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Note;
+use App\PartialNote;
+use App\Course;
 use Illuminate\Http\Request;
 
 class NotesController extends Controller
@@ -12,9 +14,11 @@ class NotesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Course $course)
     {
-        //
+        $notes = Note::where('course_id', $course->id)->get();
+        $partialNotes = PartialNote::where('course_id', $course->id)->get();
+        return view('admin.notes.index', compact('partialNotes', 'notes'))->withCourse($course);
     }
 
     /**

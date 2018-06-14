@@ -1,10 +1,11 @@
 <nav class="navbar navbar-expand-md navbar-light navbar-laravel fixed-top">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{ asset('img/favicon/favicon-32x32.png') }}" width="30" alt="">
+            <img src="{{ asset('img/favicon/favicon-32x32.png') }}" width="30" alt="Logo de Corocora">
             {{ config('app.name', 'Corocora (Aula Virtual)') }}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle Navbar</span>
             <span class="navbar-toggler-icon"></span>
         </button>
 

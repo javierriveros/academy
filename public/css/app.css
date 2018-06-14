@@ -10029,6 +10029,10 @@ video {
   bottom: 10px;
 }
 
+.btn {
+  text-transform: uppercase;
+}
+
 .btn-round {
   border-radius: 5em;
   padding-left: 1em;
