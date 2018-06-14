@@ -44,6 +44,7 @@ class TopicsController extends Controller
         $topic->user()->associate(auth()->user());
 
         if($topic->save()) {
+            flash('Se ha guardado el tema')->success();
             return redirect()->route('courses.topics.show', $topic);
         } else {
             return view('admin.topics.create', compact('topic'));
@@ -86,6 +87,7 @@ class TopicsController extends Controller
         $topic->content = $request->get('content');
 
         if($topic->save()) {
+            flash('Se ha actualizado el tema')->success();
             return redirect()->route('courses.show', [$topic->module->course]);
         } else {
             return view('admin.topics.edit', compact('topic'));
@@ -100,6 +102,7 @@ class TopicsController extends Controller
      */
     public function destroy(Course $course, Topic $topic)
     {
+        flash('Se ha eliminado el módulo')->success();
         $topic->delete();
         return redirect()->route('courses.show', [$topic->module->course]);
     }

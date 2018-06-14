@@ -42,6 +42,7 @@ class ModulesController extends Controller
         $module->user()->associate(auth()->user());
 
         if($module->save()) {
+            flash('Se ha guardado el módulo')->success();
             return redirect()->route('courses.show', $course);
         } else {
             return view('admin.modules.create', compact('module'));
@@ -72,6 +73,7 @@ class ModulesController extends Controller
         $module->description = $request->get('description');
 
         if($module->save()) {
+            flash('Se ha actualizado el módulo')->success();
             return redirect()->route('courses.show', [$module->course]);
         } else {
             return view('admin.modules.edit', compact('module'));
@@ -86,6 +88,7 @@ class ModulesController extends Controller
      */
     public function destroy(Course $course, Module $module)
     {
+        flash('Se ha eliminado el módulo')->success();
         $module->delete();
         return redirect()->route('courses.show', [$module->course]);
     }

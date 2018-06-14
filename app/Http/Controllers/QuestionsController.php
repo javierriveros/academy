@@ -81,6 +81,7 @@ class QuestionsController extends Controller
      */
     public function destroy(Course $course, Question $question)
     {
+        flash('Pregunta eliminada')->success();
         $question->delete();
         return redirect()->route('courses.show', [$question->course]);
     }

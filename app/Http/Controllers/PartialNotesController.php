@@ -45,6 +45,7 @@ class PartialNotesController extends Controller
         $partialNote->course()->associate($course);
 
         if($partialNote->save()) {
+            flash('Se ha guardado la nota parcial')->success();
             return redirect()->route('course.partial_notes.index', $course);
         } else {
             return view('course.partial_notes.create')->withInput();
@@ -75,6 +76,7 @@ class PartialNotesController extends Controller
         $partialNote->percentage = $request->get('percentage');
 
         if($partialNote->save()) {
+            flash('Se ha actualizado la nota parcial')->success();
             return redirect()->route('course.partial_notes.index', [$partialNote->course]);
         } else {
             return view('course.partial_notes.edit')->withInput();
@@ -89,6 +91,7 @@ class PartialNotesController extends Controller
      */
     public function destroy(Course $course, PartialNote $partialNote)
     {
+        flash('Se ha eliminado la nota parcial')->success();
         $partialNote->delete();
         return redirect()->route('course.partial_notes.index', [$partialNote->course]);
     }

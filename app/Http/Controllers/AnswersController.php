@@ -89,6 +89,7 @@ class AnswersController extends Controller
      */
     public function destroy(Course $course, Question $question, Answer $answer)
     {
+        flash('Se ha eliminado la respuesta')->success();
         $answer->delete();
         return redirect()->route('courses.show', [$answer->question->course]);
     }

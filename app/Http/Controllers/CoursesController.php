@@ -80,6 +80,7 @@ class CoursesController extends Controller
         $this->storeImage($request, $course);
 
         if($course->save()) {
+            flash('Se ha guardado el curso')->success();
             return redirect()->route('courses.show', $course);
         } else {
             return view('admin.courses.create', compact('course'));
@@ -168,6 +169,7 @@ class CoursesController extends Controller
             $this->storeImage($request, $course);
 
         if($course->save()) {
+            flash('Se ha actualizado el curso')->success();
             return redirect()->route('admin.courses.index');
         } else {
             return view('admin.courses.edit', compact('course'));
@@ -182,6 +184,7 @@ class CoursesController extends Controller
      */
     public function destroy(Course $course)
     {
+        flash('Se ha eliminado el curso')->success();
         $course->delete();
         return redirect()->route('admin.courses.index');
     }
