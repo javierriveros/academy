@@ -45,7 +45,7 @@ class TopicsController extends Controller
 
         if($topic->save()) {
             flash('Se ha guardado el tema')->success();
-            return redirect()->route('courses.topics.show', $topic);
+            return redirect()->route('courses.topics.show', [$course, $topic]);
         } else {
             return view('admin.topics.create', compact('topic'));
         }
