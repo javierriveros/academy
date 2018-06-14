@@ -12,9 +12,9 @@
 </section>
 <div class="container">
     <div class="row">
-        @forelse ($courses as $course)
+        @forelse (\Auth::user()->studentCourses as $course)
             <div class="col-sm-6 col-md-4 col-xl-3 mb-4">
-                @include('courses.course', ['course' => $course])
+                @include('courses.course', ['course' => $course->course])
             </div>
         @empty
             <div class="card text-center col-12 mb-3">

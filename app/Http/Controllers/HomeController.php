@@ -41,11 +41,8 @@ class HomeController extends Controller
         if (\Auth::user()->isTeacher()) {
             return redirect()->route('admin.dashboard');
         }
-        $courses = Course::whereIn('id', function($query) {
-            $query->select('course_id')
-            ->from(with(new HasCourse)->getTable())
-            ->where('student_id', 1);
-        })->get();
+
+        $courses = \Auth::user()->studentCourses;
         
         return view('home', ['courses' => $courses]);
     }
