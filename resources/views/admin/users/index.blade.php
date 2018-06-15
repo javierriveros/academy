@@ -1,4 +1,8 @@
 @extends('layouts.app') 
+
+@section('title') Lista de usuarios
+@endsection
+
 @section('content')
     @include('partials.page-header', ['title' => 'Todos los usuarios'])
 <div class="container">

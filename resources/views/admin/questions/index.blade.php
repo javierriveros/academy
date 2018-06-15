@@ -1,4 +1,7 @@
 @extends('layouts.app') 
+
+@section('title') Lista de preguntas
+@endsection
 @section('content')
 @include('partials.page-header', ['title' => 'Todos las preguntas'])
 <div class="container-fluid">
@@ -23,7 +26,7 @@
                             <td><a href="{{ route('courses.show', $question->course) }}">{{ $question->course->name }}</a></td>
                             <td>{{ $question->user->name }}</td>
                             <td>
-                                <a href="{{ route('course.questions.edit', [$question->course_id, $question]) }}" class="btn btn-sm btn-info" title="Editar"><i class="fa fa-pencil-alt"></i></a>
+                                <a href="{{ route('course.questions.edit', [$question->course_id, $question]) }}" class="btn btn-sm btn-info" title="Editar"><i class="fa fa-pencil-alt"></i> Editar pregunta</a>
                             </td>
                             <td>
                                 {{-- @include('course.questions.delete', $question) --}}

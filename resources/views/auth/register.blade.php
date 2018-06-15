@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title') Registrarse
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center align-items-center" style="min-height: 83vh">

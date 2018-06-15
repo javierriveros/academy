@@ -1,4 +1,7 @@
 @extends('layouts.app') 
+
+@section('title') Editar perfil
+@endsection
 @section('content')
 <main class="container">
     <article class="row justify-content-center">

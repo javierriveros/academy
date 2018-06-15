@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+Crear módulo
+@endsection
+
 @section('content')
     <div class="container mt-4">
         <h1>Nuevo módulo</h1>

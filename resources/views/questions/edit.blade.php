@@ -1,4 +1,6 @@
 @extends('layouts.app') 
+@section('title') Editar pregunta
+@endsection
 @section('content')
 <div class="container mt-4">
     <h1>Editar pregunta</h1>

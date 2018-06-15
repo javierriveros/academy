@@ -15,6 +15,9 @@
 <meta name="twitter:description" content="En Corocora (Aula Virtual) puedes crear cursos, administrarlos e incluso manejar las notas de tus estudiantes">
 <meta name="twitter:image" content="{{ asset('img/logo.png') }}">
 @endsection
+
+@section('title') Inicio
+@endsection
  
 @section('content')
 <div class="main-banner main-banner__front">

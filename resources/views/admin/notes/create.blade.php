@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title') Crear nota
+@endsection
+
 @section('content')
     <div class="container mt-4">
         <h1>Nuevo nota parcial</h1>

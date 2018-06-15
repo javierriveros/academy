@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title') Lista de Cursos
+@endsection
+
 @section('content')
     <section class="page-header page-header__front">
         <img src="{{ asset('img/banner-home-v2.jpg') }}" alt="" class="page-header__img">

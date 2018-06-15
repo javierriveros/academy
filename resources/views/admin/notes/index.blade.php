@@ -1,4 +1,8 @@
 @extends('layouts.app') 
+
+@section('title') Lista de notas del curso
+@endsection
+
 @section('content')
 @include('partials.page-header', ['title' => 'Notas del curso'])
 <div class="container-fluid">

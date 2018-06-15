@@ -15,6 +15,9 @@
 {{-- <meta name="twitter:description" content="{{ $topic->description }}"> --}}
 <meta name="twitter:image" content="{{ asset('img/logo.png') }}">
 @endsection
+
+@section('title') {{ $topic->title }}
+@endsection
  
 @section('content')
 <section class="page-header page-header__front">

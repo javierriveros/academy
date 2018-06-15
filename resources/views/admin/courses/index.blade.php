@@ -1,4 +1,7 @@
 @extends('layouts.app') 
+@section('title') Administrar cursos
+@endsection
+
 @section('content')
 @include('partials.page-header', ['title' => 'Todos los cursos'])
 <div class="container-fluid">

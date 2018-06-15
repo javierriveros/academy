@@ -1,4 +1,8 @@
 @extends('layouts.app') 
+
+@section('title') Administrar recursos
+@endsection
+
 @section('content')
 @include('partials.page-header', ['title' => 'Administrar recursos'])
 <div class="container">

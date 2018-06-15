@@ -1,4 +1,7 @@
 @extends('layouts.app') 
+
+@section('title') Editar módulo
+@endsection
 @section('content')
 <div class="container mt-4">
     <h1>Editar módulo</h1>

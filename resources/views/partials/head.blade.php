@@ -2,7 +2,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name', 'Corocora') }}</title>
+    <title>
+        @yield('title') - 
+        {{ config('app.name', 'Corocora') }}
+    </title>
 
     <!-- Favicon section -->
     @include('partials.favicon')

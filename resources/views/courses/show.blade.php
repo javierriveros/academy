@@ -17,6 +17,9 @@
 <meta name="twitter:image" content="{{ asset('img/logo.png') }}">
 @endsection
 
+@section('title') {{ $course->name }}
+@endsection
+
 @section('content')
     <section class="page-header page-header__front">
         @if($course->picture)

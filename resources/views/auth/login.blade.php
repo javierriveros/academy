@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title') Iniciar sesión
+@endsection
+
 @section('content')
     <form method="POST" action="#"  class="form-signin">
         @csrf

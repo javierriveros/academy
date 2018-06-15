@@ -1,4 +1,7 @@
 @extends('layouts.app') 
+@section('title') Crear tema
+@endsection
+
 @section('content')
 <div class="container mt-4">
     <h1>Nuevo tema</h1>

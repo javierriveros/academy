@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title') Crear curso
+@endsection
+
 @section('content')
     <div class="container mt-4">
         <h1>Nuevo curso</h1>

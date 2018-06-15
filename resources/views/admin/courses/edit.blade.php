@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title') Editar curso
+@endsection
+
 @section('content')
     <div class="container mt-4">
         <h1>Editar curso</h1>

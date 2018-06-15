@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title') Editar nota
+@endsection
+
 @section('content')
     <div class="container mt-4">
         <h1>Editar nota: {{ $partialNote->name }}</h1>
